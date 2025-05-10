@@ -4,7 +4,7 @@ from libros.models import Libro
 # Create your models here.
 
 class Critica(models.Model):
-  id_libros = models.ForeignKey(Libro, on_delete=models.CASCADE)
+  id_libros = models.ForeignKey(Libro, on_delete=models.CASCADE, related_name='criticas')
   contenido = models.CharField(max_length=50)
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now_add=True)

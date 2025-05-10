@@ -93,6 +93,8 @@ p {
   font-weight: 800;
 }
 
+
+
 #mainNav .navbar-nav .nav-item.active .nav-link {
   color: #ffffff;
   text-decoration: underline;
@@ -107,6 +109,7 @@ p {
     color: rgba(255, 255, 255, 0.4);
     text-decoration: underline;
   }
+
 
   #mainNav .navbar-nav .nav-item.active .nav-link:hover {
     color: #ffffff;
@@ -162,6 +165,7 @@ p {
   background-color: rgb(242, 245, 240);
 }
 
+
 .cta .cta-inner {
   position: relative;
   padding: 3rem;
@@ -175,9 +179,9 @@ p {
   content: '';
   position: absolute;
   top: -0.5rem;
-  bottom: -0.5rem;
+  /* bottom: -0.5rem;
   left: -0.5rem;
-  right: -0.5rem;
+  right: -0.5rem; */
   border: 0.25rem solid rgba(255, 255, 255, 0.85);
 }
 
@@ -265,10 +269,15 @@ p {
 
 a.link {
   color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  pointer-events: auto;
+  /* Asegura que sean clickeables */
 }
 
+
 a.link:hover {
-  text-decoration: none;
+  text-decoration: underline;
   color: rgba(255, 255, 255, 0.4);
 }
 
