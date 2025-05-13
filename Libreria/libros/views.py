@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Libro
 from .forms import Formulario_libros
 
+@login_required(login_url="/autenticacion/logear")
 def libro_view(request):
   if request.method == 'POST':
     form = Formulario_libros(request.POST)
@@ -28,6 +30,7 @@ def libro_view(request):
         'libros': libros,
     })
 
+@login_required(login_url="/autenticacion/logear")
 def editar_libro(request, pk):
   libro = get_object_or_404(Libro, pk=pk)
   if request.method == 'POST':
@@ -43,6 +46,7 @@ def editar_libro(request, pk):
       form = Formulario_libros(instance=libro)
     return render(request, 'libros/formulario.html', {'form': form})
 
+@login_required(login_url="/autenticacion/logear")
 def borrar_libro(request, pk):
   libro = get_object_or_404(Libro, pk=pk)
   if request.method == 'POST':

@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Critica 
 from libros.models import Libro
 from .forms import Formulario_critica
 
+@login_required(login_url="/autenticacion/logear")
 def critica_view(request):
     if request.method == 'POST':
         form = Formulario_critica(request.POST)
@@ -22,6 +24,7 @@ def critica_view(request):
         'libros': libros,
     })
 
+@login_required(login_url="/autenticacion/logear")
 def editar_critica(request, pk):
     critica = get_object_or_404(Critica, pk=pk)
     if request.method == 'POST':
@@ -33,6 +36,7 @@ def editar_critica(request, pk):
         form = Formulario_critica(instance=critica)
     return render(request, 'critica/formulario.html', {'form': form})
 
+@login_required(login_url="/autenticacion/logear")
 def borrar_critica(request, pk):
     critica = get_object_or_404(Critica, pk=pk)
     if request.method == 'POST':
