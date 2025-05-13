@@ -44,7 +44,7 @@
             <a class="nav-link text-uppercase text-expanded" href="{% url 'listado' %}">Listado libros</a>
           </li>
           <li class="nav-item {% if request.path == '/libros/' %}active{% endif %} px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="{% url 'libros' %}">Libros</a>
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'libro:libros' %}">Libros</a>
           </li>
           <li class="nav-item {% if request.path == '/critica/' %}active{% endif %} px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="{% url 'critica:critica' %}">Critica</a>
