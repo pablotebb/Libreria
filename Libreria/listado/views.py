@@ -7,9 +7,10 @@ from libros.models import Libro
 @login_required(login_url="/autenticacion/logear")
 def home(request):
   libros = Libro.objects.prefetch_related('id_libros').all()
+  #libros = Libro()
   listado_libros = list()
 
-  for libro in libros:
+  for libro in list(libros):
     listado_libros.append(libro)
     
   
