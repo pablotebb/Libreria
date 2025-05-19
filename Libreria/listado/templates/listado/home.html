@@ -2,107 +2,122 @@
 {% load static %}
 
 {% block content %}
-  <style>
-    .table-dark-blue thead th {
-      background-color: #1b3a57; /* Azul marino */
-      color: white;
-    }
 
-    .table-dark-blue tbody tr td {
-      color: white;
-      background-color: #2c2c2c;
-    }
+<!-- 🎨 Estilos personalizados solo para esta página -->
+<style>
+  /* Estilo para encabezados de tabla con azul marino */
+  .table-dark-blue thead th {
+    background-color: #1b3a57; /* Azul elegante */
+    color: white;
+  }
 
-    .criticas-list {
-      margin-left: 20px;
-    }
+  /* Celdas de contenido con fondo oscuro y texto claro */
+  .table-dark-blue tbody tr td {
+    color: white;
+    background-color: #2c2c2c;
+  }
 
-    .leido-true {
-      color: #28a745; /* Verde */
-      font-weight: bold;
-    }
+  /* Ajuste visual para listado de críticas */
+  .criticas-list {
+    margin-left: 20px;
+  }
 
-    .leido-false {
-      color: #dc3545; /* Rojo */
-      font-weight: bold;
-    }
+  /* Estados visuales claros para si se ha leído o no */
+  .leido-true {
+    color: #28a745; /* Verde positivo */
+    font-weight: bold;
+  }
 
-    .filter-bar {
-      margin-bottom: 15px;
-      padding: 10px;
-      background-color: #2c2c2c;
-      border-radius: 5px;
-      color: white;
-    }
-  </style>
+  .leido-false {
+    color: #dc3545; /* Rojo negativo */
+    font-weight: bold;
+  }
 
-  <div class="container mt-4">
-    <!-- Filtro LEÍDO -->
-    <div class="filter-bar d-flex align-items-center">
-      <strong>LEIDO: </strong>
-      <div class="form-check form-check-inline ms-3 mb-0">
-        <input class="form-check-input" style="margin-left: 8px;" type="checkbox" id="filter-leido-si" checked onchange="filtrarTabla()">
-        <label class="form-check-label" for="filter-leido-si">Sí</label>
-      </div>
-      <div class="form-check form-check-inline mb-0">
-        <input class="form-check-input" type="checkbox" id="filter-leido-no" checked onchange="filtrarTabla()">
-        <label class="form-check-label" for="filter-leido-no">No</label>
-      </div>
+  /* Barra de filtro estilizada */
+  .filter-bar {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #2c2c2c;
+    border-radius: 5px;
+    color: white;
+  }
+</style>
+
+<!-- 📊 Contenedor principal con tabla filtrable -->
+<div class="container mt-4">
+  
+  <!-- 🔍 Barra de filtros por estado de lectura -->
+  <div class="filter-bar d-flex align-items-center">
+    <strong>LEIDO: </strong>
+    <div class="form-check form-check-inline ms-3 mb-0">
+      <input class="form-check-input" style="margin-left: 8px;" type="checkbox" id="filter-leido-si" checked onchange="filtrarTabla()">
+      <label class="form-check-label" for="filter-leido-si">Sí</label>
     </div>
-
-    <!-- Tabla -->
-    <table id="tabla-libros" class="table table-dark-blue table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Título</th>
-          <th>Autor</th>
-          <th>Leído</th>
-          <th>Crítica</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for libro in listado %}
-          <tr id="fila-{{ forloop.counter }}" data-leido="{{ libro.leido }}">
-            <td>{{ libro.titulo }}</td>
-            <td>{{ libro.autor }}</td>
-            <td>
-              {% if libro.leido %}
-                <span class="leido-true">Sí</span>
-              {% else %}
-                <span class="leido-false">No</span>
-              {% endif %}
-            </td>
-            <td>
-              <ul class="criticas-list">
-                {% if libro.criticas %}
-                  <li>{{ libro.criticas.contenido }}</li>
-                {% else %}
-                  <li>No hay críticas aún.</li>
-                {% endif %}
-              </ul>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="form-check form-check-inline mb-0">
+      <input class="form-check-input" type="checkbox" id="filter-leido-no" checked onchange="filtrarTabla()">
+      <label class="form-check-label" for="filter-leido-no">No</label>
+    </div>
   </div>
 
-  <script>
-    function filtrarTabla() {
-      const mostrarSi = document.getElementById("filter-leido-si").checked;
-      const mostrarNo = document.getElementById("filter-leido-no").checked;
+  <!-- 📋 Tabla de libros con datos dinámicos -->
+  <table id="tabla-libros" class="table table-dark-blue table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Leído</th>
+        <th>Crítica</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for libro in listado %}
+        <!-- Fila identificable y con atributo data para filtrado -->
+        <tr id="fila-{{ forloop.counter }}" data-leido="{{ libro.leido }}">
+          <td>{{ libro.titulo }}</td>
+          <td>{{ libro.autor }}</td>
+          <td>
+            <!-- Estado visual con colores claros -->
+            {% if libro.leido %}
+              <span class="leido-true">Sí</span>
+            {% else %}
+              <span class="leido-false">No</span>
+            {% endif %}
+          </td>
+          <td>
+            <!-- Lista de críticas con mensaje alternativo -->
+            <ul class="criticas-list">
+              {% if libro.criticas %}
+                <li>{{ libro.criticas.contenido }}</li>
+              {% else %}
+                <li>No hay críticas aún.</li>
+              {% endif %}
+            </ul>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
-      const filas = document.querySelectorAll("#tabla-libros tbody tr");
+<!-- ⚙️ Script para filtrar filas según estado de 'leído' -->
+<script>
+  function filtrarTabla() {
+    const mostrarSi = document.getElementById("filter-leido-si").checked;
+    const mostrarNo = document.getElementById("filter-leido-no").checked;
 
-      filas.forEach(fila => {
-        const esLeido = fila.getAttribute("data-leido") === "True";
+    const filas = document.querySelectorAll("#tabla-libros tbody tr");
 
-        if ((esLeido && mostrarSi) || (!esLeido && mostrarNo)) {
-          fila.style.display = "";
-        } else {
-          fila.style.display = "none";
-        }
-      });
-    }
-  </script>
+    filas.forEach(fila => {
+      const esLeido = fila.getAttribute("data-leido") === "True";
+
+      // Mostrar u ocultar fila según estado seleccionado
+      if ((esLeido && mostrarSi) || (!esLeido && mostrarNo)) {
+        fila.style.display = "";  // Muestra la fila
+      } else {
+        fila.style.display = "none";  // Oculta la fila
+      }
+    });
+  }
+</script>
+
 {% endblock %}

@@ -10,9 +10,14 @@ from libros.models import Libro
 )
 
 class CriticaViewsTest(TestCase):
+  '''
+  nombre: Pablo
+  fecha: 19-05-2025
+  OK
+  '''
   def setUp(self):
     # Crear usuario para login
-    self.user = User.objects.create_user(username='testuser', password='12345a&dr')
+    self.user = User.objects.create_user(username='testuser', password='12345')
     
     # Crear libro para asociar crítica
     self.libro = Libro.objects.create(
@@ -28,7 +33,7 @@ class CriticaViewsTest(TestCase):
     }
 
   def login(self):
-    self.client.login(username='testuser', password='12345a&dr')
+    self.client.login(username='testuser', password='12345')
 
     # ---------------------------
     # Pruebas de vistas protegidas

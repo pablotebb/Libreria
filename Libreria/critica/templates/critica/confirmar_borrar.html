@@ -1,10 +1,16 @@
 {% extends "core/base.html" %}
-
 {% load static %}
 
+{# 💥 Plantilla: confirmar_borrar.html                                  #}
+{# ────────────────────────────────────────────────                      #}
+{# Pantalla de confirmación antes de eliminar una crítica.               #}
+{# Muestra el contenido de la crítica y pide confirmación explícita al usuario.                                                                 #}
+{# Evita borrados accidentales con una UI clara y enfocada.              #}
 
 {% block content %}
+
 <style>
+  /* 🎨 Estilos personalizados para esta pantalla de confirmación */
   body {
     background-color: #003366;
     color: white;
@@ -56,11 +62,11 @@
   }
 
   button {
-    background-color:  #007bff;;
+    background-color: #007bff;
   }
 
   button:hover {
-    background-color:  #0056b3;;
+    background-color: #0056b3;
   }
 
   a.button-cancel {
@@ -72,15 +78,19 @@
   }
 </style>
 
-
-
-  <div class="container-confirm">
+<div class="container-confirm">
+  {# ⚠️ Mensaje de advertencia: acción irreversible #}
   <h1>¿Estás seguro de borrar esta crítica?</h1>
+
+  {# 📄 Mostramos el libro y el contenido de la crítica para confirmar #}
   <p>{{ critica.id_libros }} - "{{ critica.contenido }}"</p>
+
+  {# ✅ Formulario de confirmación #}
   <form method="post">
     {% csrf_token %}
     <button type="submit">Sí, borrar</button>
-    <a href="{% url 'critica:critica' %}">Cancelar</a>
+    <a href="{% url 'critica:critica' %}" class="button-cancel">Cancelar</a>
   </form>
 </div>
+
 {% endblock %}

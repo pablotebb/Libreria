@@ -1,11 +1,16 @@
 {% extends "core/base.html" %}
-
 {% load static %}
 
+{# 🖋️ Plantilla: formulario.html                                   #}
+{# ────────────────────────────────────────────────                 #}
+{# Usada para editar una crítica existente.                         #}
+{# Muestra el título del libro y un formulario listo para actualizar contenido. #}
+{# El estilo está incrustado para evitar dependencias externas durante desarrollo rápido. #}
 
 {% block content %}
 
 <style>
+  /* 🎨 Estilos visuales personalizados */
   body {
     background-color: #003366;
     color: white;
@@ -93,16 +98,24 @@
     background-color: #5d6d7e;
   }
 </style>
+
 <div class="container-form">
   <h1>Editar Crítica</h1>
+
+  {# 📚 Mostramos el título del libro asociado #}
   <p><strong>Libro:</strong> {{ titulo_libro }}</p>
-  <div style="display: flex; gap: 15px; justify-content: flex-end; vertical-align: top">
+
+  {# 📝 Formulario principal de edición #}
+  <div style="display: flex; gap: 15px; justify-content: flex-end;">
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Guardar</button>
     </form>
+
+    {# 🔙 Botón de cancelar: vuelve a la lista de críticas #}
     <a href="{% url 'critica:critica' %}">Cancelar</a>
   </div>
 </div>
+
 {% endblock %}

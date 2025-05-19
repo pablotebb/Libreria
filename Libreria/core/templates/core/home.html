@@ -1,43 +1,64 @@
-{% extends "core/base.html" %}
+{# ┌──────────────────────────────────────────────┐     #}
+{# │          PLANTILLA PRINCIPAL: HOME           │     #}
+{# └──────────────────────────────────────────────┘     #}
+{# Esta es la página de inicio de la aplicación.        #}
+{# Muestra una introducción visual atractiva y enlaces  #}
+{# clave para navegar al listado de libros u opiniones. #}
 
+{% extends "core/base.html" %}
 {% load static %}
 
-
+{# Carga el bloque principal de contenido #}
 {% block content %}
-   <!-- Cabecera -->
-   <section class="page-section clearfix">
+
+  {# ┌──────────────────────────────────────────────┐   #}
+  {# │           Sección de Introducción            │   #}
+  {# └──────────────────────────────────────────────┘   #}
+  {# Una cabecera visual con imagen destacada y texto   #}
+  {# introductorio. Incluye un enlace directo a las     #}
+  {# opiniones de los libros.                           #}
+  
+  <section class="page-section clearfix">
     <div class="container">
       <div class="intro">
-        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'core/img/principal.jpg' %}" alt="Imagen principal">
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded"
+             src="{% static 'core/img/principal.jpg' %}"
+             alt="Imagen principal">
         <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-          <h2 class="section-heading mb-4" >
+          <h2 class="section-heading mb-4">
             <span class="section-heading-upper">Libreria</span>
             <span class="section-heading-lower">libros</span>
           </h2>
-          <p class="mb-3"><a href="{% url 'listado' %}">Ver opiniones</a> 
+          <p class="mb-3">
+            <a href="{% url 'listado' %}">Ver opiniones</a>
           </p>
-         
         </div>
       </div>
     </div>
   </section>
 
-
+  {# ┌──────────────────────────────────────────────┐   #}
+  {# │       Sección de Llamada a la Acción         │   #}
+  {# └──────────────────────────────────────────────┘   #}
+  {# Mensaje motivador + botón de acción para ver más   #}
+  {# información sobre libros y continuar navegando.    #}
   
-    <!-- Message -->
-    <section class="page-section cta">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <div class="cta-inner text-center rounded">
-              <h2 class="section-heading mb-4">
-                <span class="section-heading-upper">"La imaginación comienza con una página"</span>
-                <span class="section-heading-lower">Listado de libros</span>
-              </h2>
-              <p class="mb-0"><a href="{% url 'listado' %}">Más aquí</a></p>
-            </div>
+  <section class="page-section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner text-center rounded">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">"La imaginación comienza con una página"</span>
+              <span class="section-heading-lower">Listado de libros</span>
+            </h2>
+            <p class="mb-0">
+              <a href="{% url 'listado' %}">Más aquí</a>
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
 {% endblock %}

@@ -1,13 +1,32 @@
 from django.contrib import admin
 from .models import Categoria, Libro
 
-# Register your models here.
+
+# ┌──────────────────────────────────────────────────────┐
+# │         Configuración personalizada del Admin        │
+# └──────────────────────────────────────────────────────┘
+
+# Estas clases permiten personalizar cómo se muestran y manejan los modelos
+# dentro del panel de administración de Django.
+
 
 class CategoriaAdmin(admin.ModelAdmin):
-  readonly_fields = ("created", "updated")
-  
-class LibroAdmin(admin.ModelAdmin):
-  readonly_fields = ("created", "updated")
+    """
+    Configuración personalizada para el modelo Categoria en el admin.
+    - Campos 'created' y 'updated' marcados como solo lectura.
+    """
+    readonly_fields = ("created", "updated")  # Evita edición manual de campos automáticos
 
-admin.site.register(Categoria, CategoriaAdmin)
-admin.site.register(Libro, LibroAdmin)
+
+class LibroAdmin(admin.ModelAdmin):
+    """
+    Configuración personalizada para el modelo Libro en el admin.
+    - Campos 'created' y 'updated' también son de solo lectura.
+    """
+    readonly_fields = ("created", "updated")  # Protege campos generados automáticamente
+
+
+# ───── Registro de modelos en el panel de administración ─────
+
+admin.site.register(Categoria, CategoriaAdmin)  # Registramos Categoria con su configuración
+admin.site.register(Libro, LibroAdmin)          # Registramos Libro con su configuración

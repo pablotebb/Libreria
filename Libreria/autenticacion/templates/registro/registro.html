@@ -1,16 +1,24 @@
 {% extends "core/base.html" %}
-
 {% load static %}
 
+{# 🧑‍💻 PLANTILLA DE REGISTRO #}
+{# Este es el formulario donde los usuarios nuevos se registran en la aplicación #}
 
 {% block content %}
 
-<form method="post" action="" style="color:white;">
-  {% csrf_token %}
-  <div style="width: 75%; margin: auto;">
-    {{form}}
-    <input type="submit" class="btn btn-success" value="Registrate">
-  </div>
-</form>
+  {# 📝 Formulario principal de registro #}
+  <form method="post" action="" style="color:white;">
+    {% csrf_token %}
+
+    {# 🧱 Contenedor centrado del formulario, ajustado al 75% del ancho #}
+    <div style="width: 75%; margin: auto;">
+
+      {# 🔤 Campos automáticos del formulario de registro (UserCreationForm) #}
+      {{ form }}
+
+      {# ✅ Botón para enviar el formulario y crear la cuenta #}
+      <input type="submit" class="btn btn-success" value="Registrate">
+    </div>
+  </form>
 
 {% endblock %}

@@ -1,5 +1,15 @@
 from django.shortcuts import render
 
-# Create your views here.
+# ┌──────────────────────────────────────────────┐
+# │           Vista Principal: home              │
+# └──────────────────────────────────────────────┘
+# La función `home` es la encargada de mostrar la 
+# página de inicio de nuestra aplicación web.
+# Recibe una solicitud (request) y responde 
+# devolviendo un template HTML procesado.
+
 def home(request):
-  return render(request, 'core/home.html')
+    # Renderizamos el template 'core/home.html'
+    # Este archivo HTML contiene la estructura visual
+    # de nuestra página principal.
+    return render(request, 'core/home.html')

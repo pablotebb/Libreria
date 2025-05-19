@@ -1,11 +1,11 @@
 {% extends "core/base.html" %}
-
 {% load static %}
-
 
 {% block content %}
 
+<!-- 🎨 Estilos personalizados solo para esta página -->
 <style>
+  /* Fondo principal con color azul profundo */
   body {
     background-color: #003366;
     color: white;
@@ -14,13 +14,14 @@
     padding: 0;
   }
 
+  /* Contenedor principal del formulario con estilo moderno */
   .container-form {
     max-width: 600px;
-    margin: 80px auto;
+    margin: 80px auto;  /* Centrado vertical y horizontal */
     padding: 30px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);  /* Fondo semitransparente */
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);  /* Sombra suave */
   }
 
   h1 {
@@ -33,7 +34,7 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 15px;  /* Espaciado entre campos */
   }
 
   label {
@@ -41,6 +42,7 @@
     margin-top: 10px;
   }
 
+  /* Estilo uniforme para campos de texto, select y textarea */
   input[type="text"],
   textarea,
   select {
@@ -58,6 +60,7 @@
     min-height: 100px;
   }
 
+  /* Botón principal de envío */
   button {
     padding: 12px;
     font-size: 16px;
@@ -75,6 +78,7 @@
     background-color: #0056b3;
   }
 
+  /* Enlace de cancelación con estilo similar al botón */
   .container-form a {
     display: inline-block;
     margin-top: 15px;
@@ -94,16 +98,21 @@
   }
 </style>
 
-
+<!-- 📝 Formulario central para editar una crítica -->
 <div class="container-form">
   <h1>Editar Crítica</h1>
+
+  <!-- Formulario + botón de cancelar alineados horizontalmente -->
   <div style="display: flex; gap: 15px; justify-content: flex-end; vertical-align: top">
     <form method="post">
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ form.as_p }}  <!-- Mostramos todos los campos del formulario dentro de párrafos -->
       <button type="submit">Guardar</button>
     </form>
+
+    <!-- Botón de cancelar que vuelve a la lista de libros -->
     <a href="{% url 'libro:libros' %}">Cancelar</a>
   </div>
 </div>
+
 {% endblock %}

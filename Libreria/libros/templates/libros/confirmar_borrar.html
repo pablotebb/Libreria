@@ -1,10 +1,11 @@
 {% extends "core/base.html" %}
-
 {% load static %}
 
-
 {% block content %}
+
+<!-- 🎨 Estilos personalizados solo para esta pantalla de confirmación -->
 <style>
+  /* Fondo principal con color azul profundo */
   body {
     background-color: #003366;
     color: white;
@@ -13,14 +14,15 @@
     padding: 0;
   }
 
+  /* Contenedor centralizado para la confirmación de borrado */
   .container-confirm {
     max-width: 500px;
-    margin: 100px auto;
+    margin: 100px auto;  /* Centrado vertical y horizontal */
     padding: 30px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);  /* Fondo semitransparente */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    text-align: center;
+    text-align: center;  /* Todo el contenido se alinea al centro */
   }
 
   h1 {
@@ -31,16 +33,17 @@
   p {
     font-size: 16px;
     margin-bottom: 30px;
-    color: #cccccc;
+    color: #cccccc;  /* Texto suave para detalles */
   }
 
   form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    align-items: center;
+    gap: 15px;  /* Espaciado entre botones */
+    align-items: center;  /* Botones centrados */
   }
 
+  /* Estilo compartido para botones y enlaces de acción */
   button,
   a.button-cancel {
     padding: 10px 20px;
@@ -55,14 +58,16 @@
     max-width: 200px;
   }
 
+  /* Botón principal de confirmación */
   button {
-    background-color:  #007bff;;
+    background-color: #007bff;
   }
 
   button:hover {
-    background-color:  #0056b3;;
+    background-color: #0056b3;
   }
 
+  /* Enlace con estilo de botón para cancelar */
   a.button-cancel {
     background-color: #7f8c8d;
   }
@@ -72,14 +77,17 @@
   }
 </style>
 
-
+<!-- ⚠️ Pantalla de confirmación antes de borrar un libro -->
 <div class="container-confirm">
-<h1>¿Estás seguro de borrar esta crítica?</h1>
-<p>{{ libro.autor }} - "{{ libro.titulo }}"</p>
-<form method="post">
-  {% csrf_token %}
-  <button type="submit">Sí, borrar</button>
-  <a href="{% url 'libro:libros' %}">Cancelar</a>
-</form>
+  <h1>¿Estás seguro de borrar esta crítica?</h1>
+  <p>{{ libro.autor }} - "{{ libro.titulo }}"</p>
+
+  <!-- Formulario con opciones de confirmación -->
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, borrar</button>
+    <a href="{% url 'libro:libros' %}" class="button-cancel">Cancelar</a>
+  </form>
 </div>
+
 {% endblock %}

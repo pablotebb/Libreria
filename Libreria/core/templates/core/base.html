@@ -1,54 +1,75 @@
+{# ┌──────────────────────────────────────────────┐                #}
+{# │       PLANTILLA BASE: ESTRUCTURA GLOBAL      │                #}
+{# └──────────────────────────────────────────────┘                #}
+{# Esta es la plantilla principal de la aplicación.                #}
+{# Define la estructura común de todas las páginas:                #}
+{# - Cabecera con título y login                                   #}  
+{# - Barra de navegación                                           #}
+{# - Contenido dinámico ({% block content %})                      #}
+{# - Footer                                                        #}
+{# - Estilos, scripts y fuentes globales                           #}
+
+<!DOCTYPE html>
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplicación web de gestión de libros y críticas literarias">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aplicación web de gestión de libros y críticas literarias">
-    <title>Biblioteca - Gestión de Libros</title>
+  <!-- Título global -->
+  <title>Biblioteca - Gestión de Libros</title>
 
-    {% load static %}
-    <!-- favicon -->
-    <link rel="icon" href="{% static 'core/favicon.ico' %}" type="image/x-icon">
+  {% load static %}
+  
+  <!-- Icono del sitio (favicon) -->
+  <link rel="icon" href="{% static 'core/favicon.ico' %}" type="image/x-icon">
 
-    <!-- Bootstrap -->
-    <link href="{% static 'core/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Hoja de estilos de Bootstrap -->
+  <link href="{% static 'core/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
-     <!-- Fonts -->
-    
-     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
-     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
-     
+  <!-- Carga de fuentes externas -->
+  <!-- Raleway para textos ligeros y Lora para contenido narrativo -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway :wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora :400,400i,700,700i" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{% static 'core/css/gestion.css' %}" rel="stylesheet">
+  <!-- Estilos personalizados de la aplicación -->
+  <link href="{% static 'core/css/gestion.css' %}" rel="stylesheet">
 </head>
 
 <body>
 
-    <h1 class="site-heading text-center text-white d-none d-lg-block">
-      
-        <span class="site-heading-lower">Biblioteca</span>
-      </h1>
-      <div style="text-align: right; margin-right: 100px; color: white;">
-       
-        
-      </div>
+  {# ┌──────────────────────────────────────────────┐               #}
+  {# │         Título Principal del Sitio           │               #}
+  {# └──────────────────────────────────────────────┘               #}
+  {# Solo visible en pantallas grandes (d-none d-lg-block)          #}
+  <h1 class="site-heading text-center text-white d-none d-lg-block">
+    <span class="site-heading-lower">Biblioteca</span>
+  </h1>
 
+  {# ┌──────────────────────────────────────────────┐                #}
+  {# │         Barra superior: Login/Logout         │                #}
+  {# └──────────────────────────────────────────────┘                #}
+  {# Muestra opciones según si el usuario está autenticado o no      #}
+  <div style="text-align: right; margin-right: 100px; color: white;">
+    {% if user.is_authenticated %}
+      Hola {{user.username}} &nbsp; &nbsp;
+      <a href="{% url 'cerrar_sesion' %}" style="color: white;">Cerrar sesión</a>
+    {% else %}
+      <a href="{% url 'logear' %}" style="color: white;">Login</a> &nbsp; &nbsp;
+      <a href="{% url 'autenticacion'%}" style="color: white;">Registrate</a>
+    {% endif %}
+  </div>
 
-      <div style="text-align: right; margin-right: 100px; color: white;">
-        {% if user.is_authenticated %}
-          Hola {{user.username}} &nbsp; &nbsp; <a href="{% url 'cerrar_sesion' %}" style="color: white;">Cerrar sesión</a>
-        {% else %}
-          <a href="{% url 'logear' %}" style="color: white;">Login</a> &nbsp; &nbsp; <a href="{% url 'autenticacion'%}" style="color: white;">Registrate</a>
-        {% endif %}
-      </div>
-
-
- <!-- Navbar -->
- <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+  {# ┌──────────────────────────────────────────────┐                 #}
+  {# │             Navegación (Navbar)              │                 #}
+  {# └──────────────────────────────────────────────┘                 #}
+  {# Menú de navegación principal con enlaces a las vistas clave.     #}
+  {# El estado "active" se aplica dinámicamente según la ruta actual. #}
+  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
-      <!-- MENSAJES DE CONFIRMACIÓN O ERROR -->
+
+      {# Mostrar mensajes temporales como confirmaciones o errores #}
       <div class="container-messages">
         {% if messages %}
           <ul class="messages">
@@ -60,91 +81,108 @@
           </ul>
         {% endif %}
       </div>
+
+      {# Logo en móvil #}
       <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'core:home' %}">Libros</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
+      {# Botón para menú colapsable en móviles #}
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive"
+        aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      {# Enlaces principales del menú #}
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mx-auto">
+
           <li class="nav-item {% if request.path == '/' %}active{% endif %} px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="{% url 'core:home' %}">Inicio</a>
           </li>
+
           <li class="nav-item {% if request.path == '/listado/' %}active{% endif %} px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="{% url 'listado' %}">Listado libros</a>
           </li>
+
           <li class="nav-item {% if request.path == '/libros/' %}active{% endif %} px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="{% url 'libro:libros' %}">Libros</a>
           </li>
+
           <li class="nav-item {% if request.path == '/critica/' %}active{% endif %} px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="{% url 'critica:critica' %}">Critica</a>
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'critica:critica' %}">Crítica</a>
           </li>
+
         </ul>
       </div>
     </div>
   </nav>
 
+  {# ┌──────────────────────────────────────────────┐                     #}
+  {# │        Contenido Dinámico Principal          │                     #}
+  {# └──────────────────────────────────────────────┘                     #}
+  {# Este bloque será rellenado por otras plantillas que hereden de esta. #}
+  {# Por ejemplo: home.html, listado.html, etc.                           #}
+  {% block content %}
+  {% endblock %}
 
-<!-- Contenido cambiante -->
-{% block content %}
+  {# ┌──────────────────────────────────────────────┐                     #}
+  {# │              Footer del Sitio                │                     #}
+  {# └──────────────────────────────────────────────┘                     #}
+  {# Incluye redes sociales, links legales y derechos de autor.           #}
+  <footer class="footer text-faded text-center py-5">
+    <div class="container">
+      <p class="m-0">
+        <a href="#" class="link">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a href="#" class="link">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a href="#" class="link">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </p>
+      <p class="m-0 mbt">
+        <a href="sample.html" class="link">Política de privacidad</a> ·
+        <a href="sample.html" class="link">Aviso legal</a> ·
+        <a href="sample.html" class="link">Cookies</a>
+      </p>
+      <p class="m-0 mbt1">&copy; Librería 2025</p>
+    </div>
+  </footer>
 
-{% endblock %}
+  {# ┌──────────────────────────────────────────────┐                     #}
+  {# │      Scripts JavaScript (Bootstrap, etc.)    │                     #}
+  {# └──────────────────────────────────────────────┘                     #}
+  <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-    <!-- Footer -->
-    <footer class="footer text-faded text-center py-5">
-      <div class="container">
-        <p class="m-0">
-	        <a href="#" class="link">
-	          <span class="fa-stack fa-lg">
-	            <i class="fa fa-circle fa-stack-2x"></i>
-	            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-	          </span>
-	        </a>
-	        <a href="#" class="link">
-	          <span class="fa-stack fa-lg">
-	            <i class="fa fa-circle fa-stack-2x"></i>
-	            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-	          </span>
-	        </a>
-	        <a href="#" class="link">
-	          <span class="fa-stack fa-lg">
-	            <i class="fa fa-circle fa-stack-2x"></i>
-	            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-	          </span>
-	        </a>
-	    </p>
-        <p class="m-0 mbt">
-        	<a href="sample.html" class="link">Política de privacidad</a> ·
-        	<a href="sample.html" class="link">Aviso legal</a> ·
-        	<a href="sample.html" class="link">Cookies</a>
-		</p>
-        <p class="m-0 mbt1">&copy; Gestión de Pedidos 2020</p>
-      </div>
-	</footer>
+  {# Script para hacer desaparecer los mensajes después de unos segundos #}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var alerts = document.querySelectorAll(".alert");
 
-    <!-- Bootstrap -->
-    <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+      alerts.forEach(function (alert) {
+        setTimeout(function () {
+          alert.style.transition = "opacity 0.5s ease";
+          alert.style.opacity = "0";
 
-    <!-- Para que desaparezcan los mensajes, poco a poco -->
-    <script>
-      // Busca todos los elementos con clase 'alert'
-      document.addEventListener("DOMContentLoaded", function () {
-        var alerts = document.querySelectorAll(".alert");
-    
-        alerts.forEach(function (alert) {
-          // Hacer que desaparezcan después de 5 segundos (5000 ms)
           setTimeout(function () {
-            alert.style.transition = "opacity 0.5s ease";
-            alert.style.opacity = "0";
-    
-            setTimeout(function () {
-              alert.remove();
-            }, 500); // Tiempo de la transición
-          }, 5000);
-        });
+            alert.remove();
+          }, 500); // Tiempo de la transición
+        }, 5000);
       });
-    </script>
+    });
+  </script>
 </body>
-
 
 </html>

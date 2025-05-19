@@ -1,17 +1,30 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from libros.models import Libro
+from django.contrib.auth.decorators import login_required  # Protege vistas contra usuarios no autenticados
+from libros.models import Libro  # Modelo que usamos para mostrar datos
 
-# Create your views here.
 
+# ┌──────────────────────────────────────────────────────┐
+# │         Vista principal del listado de libros        │
+# └──────────────────────────────────────────────────────┘
 @login_required(login_url='/autenticacion/logear')
 def home(request):
-  libros = Libro.objects.prefetch_related('usuario').all()
-  #libros = Libro()
-  listado_libros = list()
+    """
+    Muestra una lista de todos los libros disponibles.
+    Ideal para páginas de inicio o dashboards privados.
 
-  for libro in list(libros):
-    listado_libros.append(libro)
-    
-  
-  return render(request, 'listado/home.html', {"listado": listado_libros})
+    Usa prefetch_related para optimizar consultas a relaciones,
+    especialmente útiles si se accede frecuentemente al usuario dueño de cada libro.
+    """
+
+    # Cargamos todos los libros con su relación 'usuario' previamente cargada
+    libros = Libro.objects.prefetch_related('usuario').all()
+
+    # 📦 Creamos un listado iterable de libros para pasar a la plantilla
+    listado_libros = list()
+
+    for libro in list(libros):
+        # Añadimos cada libro al listado (podrías agregar lógica adicional aquí)
+        listado_libros.append(libro)
+
+    # 🧾 Renderizamos la plantilla pasando el listado como contexto
+    return render(request, 'listado/home.html', {"listado": listado_libros})

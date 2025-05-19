@@ -135,5 +135,7 @@ APPEND_SLASH = True   # Esto hace que /autenticacion/logear → automáticamente
 
 LOGIN_URL = '/autenticacion/logear/'
 
+AUTH_PASSWORD_VALIDATORS = [] # quitar en producción
+
 
 

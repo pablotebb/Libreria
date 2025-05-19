@@ -1,24 +1,33 @@
 {% extends "core/base.html" %}
-
 {% load static %}
 
+{# 🛏️ PLANTILLA DE INICIO DE SESIÓN #}
+{# Esta es la interfaz amigable donde los usuarios ingresan sus credenciales #}
 
 {% block content %}
 
-<form method="post" action="" style="color:white;">
-  {% csrf_token %}
-  <div style="width: 75%; margin: auto;">
-    {% if messages %}
-      {% for mensaje in messages %}
-        <span class="alert alert-{{mensaje.tags}}">{{mensaje}}</span> 
-      {% endfor %}
-    {% endif %}
-    <br>
-    <br>
-    <br>
-    {{form}}
-    <input type="submit" class="btn btn-success" value="Login">
-  </div>
-</form>
+  {# 🔒 Formulario de login con estilo y mensajes inteligentes #}
+  <form method="post" action="" style="color:white;">
+    {% csrf_token %}
+    
+    {# 📦 Contenedor principal del formulario, centrado visualmente #}
+    <div style="width: 75%; margin: auto;">
+      
+      {# 💬 Mostrar mensajes de error o éxito si existen #}
+      {% if messages %}
+        {% for mensaje in messages %}
+          <span class="alert alert-{{mensaje.tags}}">{{mensaje}}</span> 
+        {% endfor %}
+      {% endif %}
+
+      <br><br><br>
+
+      {# 🧾 Campo automático del formulario de autenticación #}
+      {{ form }}
+
+      {# ✅ Botón de envío del formulario #}
+      <input type="submit" class="btn btn-success" value="Login">
+    </div>
+  </form>
 
 {% endblock %}
