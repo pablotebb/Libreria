@@ -4,9 +4,9 @@ from libros.models import Libro
 
 # Create your views here.
 
-@login_required(login_url="/autenticacion/logear")
+@login_required(login_url='/autenticacion/logear')
 def home(request):
-  libros = Libro.objects.prefetch_related('id_libros').all()
+  libros = Libro.objects.prefetch_related('usuario').all()
   #libros = Libro()
   listado_libros = list()
 

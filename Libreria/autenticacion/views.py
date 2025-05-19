@@ -19,7 +19,7 @@ class VRegistro(View):
     if form.is_valid():
       usuario = form.save()
       login(request, usuario)
-      return redirect("Home")
+      return redirect("core:home")
     else:
       for msg in form.error_messages:
         messages.error(request, form.error_messages[msg])
@@ -27,7 +27,7 @@ class VRegistro(View):
 
 def cerrar_sesion(request):
   logout(request)
-  return redirect("Home")
+  return redirect("core:home")
 
 def logear(request):
   if request.method == "POST":
@@ -38,7 +38,7 @@ def logear(request):
       usuario = authenticate(username=nombre_usuario, password=contra)
       if usuario is not None:
         login(request, usuario)
-        return redirect("Home")
+        return redirect("core:home")
       else:
         messages.error(request, "usuario no válido")
     else:

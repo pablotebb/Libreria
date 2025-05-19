@@ -16,12 +16,12 @@ class Categoria(models.Model):
     return self.nombre
   
 class Libro(models.Model):
-  id_libros = models.ForeignKey(User, on_delete=models.CASCADE)
+  usuario = models.ForeignKey(User, on_delete=models.CASCADE)
   isbn = models.CharField(max_length=20)
   autor = models.CharField(max_length=50)
   titulo = models.CharField(max_length=50)
   categoria = models.ManyToManyField(Categoria)
-  contenido = models.TextField(max_length=200)
+  contenido = models.TextField()
   imagen = models.ImageField(upload_to="libros", null=True, blank=True)
   leido = models.BooleanField(default=True)
   created = models.DateTimeField(auto_now_add=True)
