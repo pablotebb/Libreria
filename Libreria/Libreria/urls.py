@@ -10,6 +10,8 @@ Aquí se decide qué vista maneja cada URL, y cómo se organizan las diferentes 
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 # ┌──────────────────────────────────────────────────────┐
 # │               Definición de Rutas Principales        │
@@ -39,4 +41,7 @@ urlpatterns = [
     # 🔐 Sistema de autenticación personalizado
     # Maneja login, registro, logout, etc., bajo /autenticacion/
     path("autenticacion/", include("autenticacion.urls")),
-]
+] 
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

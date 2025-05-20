@@ -85,7 +85,7 @@
     <!-- 📝 Formulario para agregar un nuevo libro -->
     <div class="form-container">
       <h2>Agregar Libro</h2>
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <!-- Campo: Categoría -->
@@ -98,6 +98,10 @@
         <div class="form-group">
           <label for="{{ form.isbn.id_for_label }}">Isbn:</label>
           {{ form.isbn }}
+          <!-- ERROR -->
+          {% if form.isbn.errors %}
+            <div class="alert alert-danger mt-2">{{ form.isbn.errors }}</div>
+          {% endif %}
         </div>
 
         <!-- Campo: Autor -->
@@ -110,6 +114,10 @@
         <div class="form-group">
           <label for="{{ form.titulo.id_for_label }}">Título:</label>
           {{ form.titulo }}
+          <!-- ERROR -->
+          {% if form.titulo.errors %}
+            <div class="alert alert-danger mt-2">{{ form.titulo.errors }}</div>
+          {% endif %}
         </div>
 
         <!-- Campo: Contenido -->
@@ -143,6 +151,9 @@
       <ul>
         {% for libro in libros %}
           <li>
+            {% if libro.imagen %}
+              <img src="{{ libro.imagen.url }}" alt="Portada de {{ libro.titulo }}" style="width: 60px; height: auto; vertical-align: middle;">
+            {% endif %}
             <strong>{{ libro.autor }}</strong>: "{{ libro.titulo }}"
             <div class="actions">
               <a href="{% url 'libro:editar_libro' libro.pk %}">Editar</a>

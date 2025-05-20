@@ -1,6 +1,8 @@
 from django import forms
 from .models import Libro
+from PIL import Image  # Para verificar que sea una imagen válida
 from django.core.exceptions import ValidationError  # Para validaciones personalizadas
+import os
 
 
 # ┌──────────────────────────────────────────────────────┐
@@ -60,3 +62,29 @@ class Formulario_libros(forms.ModelForm):
             raise ValidationError("El título debe tener al menos 3 caracteres.")
 
         return titulo
+      
+    # ───── Validación personalizada para Imagen ─────
+    def clean_imagen(self):
+        imagen = self.cleaned_data.get('imagen')
+
+        if imagen:
+            # Verificar tipo de archivo
+            try:
+                # Abrir con PIL para asegurar que es una imagen real
+                img = Image.open(imagen)
+                img.verify()  # Verifica que sea una imagen válida
+                if img.format not in ['JPEG', 'PNG', 'GIF', 'WEBP']:
+                    raise ValidationError("Formato de imagen no soportado. Usa JPG, PNG, GIF o WEBP.")
+            except Exception as e:
+                raise ValidationError("El archivo no es una imagen válida.")
+
+            # Limitar tamaño a 5MB por ejemplo
+            if imagen.size > 5 * 1024 * 1024:
+                raise ValidationError("La imagen no debe superar los 5MB.")
+
+            # Sanitizar nombre del archivo
+            nombre_base, extension = os.path.splitext(imagen.name)
+            nombre_seguro = f"libro_{self.cleaned_data.get('titulo', 'sin_titulo')}{extension}"
+            imagen.name = nombre_seguro
+
+        return imagen

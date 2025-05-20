@@ -16,7 +16,7 @@ def libro_view(request):
     """
 
     if request.method == 'POST':
-        form = Formulario_libros(request.POST)
+        form = Formulario_libros(request.POST, request.FILES)
 
         if form.is_valid():
             libro = form.save(commit=False)
@@ -30,7 +30,10 @@ def libro_view(request):
         else:
             messages.error(request, 'Hubo errores al crear el libro. Por favor corrige los campos.')
             print('Errores:', form.errors)  # Útil para debugging rápido
-            return redirect('libro:libros')
+            return render(request, 'libros/libro.html', {
+                'form': form,
+                'libros': Libro.objects.all(), 
+            })
 
     else:
         form = Formulario_libros()
@@ -55,7 +58,7 @@ def editar_libro(request, pk):
     libro = get_object_or_404(Libro, pk=pk)
 
     if request.method == 'POST':
-        form = Formulario_libros(request.POST, instance=libro)
+        form = Formulario_libros(request.POST, request.FILES, instance=libro)
 
         if form.is_valid():
             libro = form.save(commit=False)

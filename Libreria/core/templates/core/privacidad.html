@@ -1,0 +1,133 @@
+{# ┌──────────────────────────────────────────────┐     #}
+{# │          PLANTILLA PRINCIPAL: PRIVACIDAD     │     #}
+{# └──────────────────────────────────────────────┘     #}
+{#                                                      #}
+{#                                                      #}
+{#   Esta es la página de Privacidad.                   #}
+
+{% extends "core/base.html" %}
+{% load static %}
+
+{# Carga la pagina Aviso Legal #}
+{% block content %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container2 {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 70px;
+            margin-bottom: 250px;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-size: 14px;
+        }
+
+       
+
+    </style>
+
+
+<div class="container2">
+
+    <header>
+        <h1>Política de Privacidad</h1>
+        <p>Última actualización: 5 de abril de 2025</p>
+    </header>
+
+    <section>
+        <h2>1. Responsable del Tratamiento</h2>
+        <p>
+            Nombre: Tu Empresa S.L.<br>
+            CIF: B12345678<br>
+            Dirección: Calle Falsa, 123, 08000 Barcelona, España<br>
+            Email: privacidad@tudominio.com
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Datos que recopilamos</h2>
+        <p>
+            Podemos recopilar datos personales como tu nombre, email, dirección IP, información de uso de la web, 
+            y cualquier otro dato facilitado voluntariamente a través de formularios o interacciones en la web.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Finalidad del Tratamiento</h2>
+        <p>
+            Los datos se tratan con las siguientes finalidades:
+            <ul>
+                <li>Gestionar el registro de usuarios.</li>
+                <li>Enviar comunicaciones comerciales (si aceptas recibirlas).</li>
+                <li>Mejorar la experiencia del usuario.</li>
+                <li>Cumplir obligaciones legales.</li>
+            </ul>
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Legitimación</h2>
+        <p>
+            El tratamiento se basa en tu consentimiento al usar este sitio web y/o registrarte. También puede basarse en el interés legítimo o cumplimiento legal.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Plazo de Conservación</h2>
+        <p>
+            Tus datos se conservarán mientras mantengas tu cuenta activa o mientras sean necesarios para cumplir con obligaciones legales.
+        </p>
+    </section>
+
+    <section>
+        <h2>6. Cesión de Datos</h2>
+        <p>
+            No se cederán datos a terceros salvo por obligación legal o si es necesario para la prestación del servicio (ej.: proveedores de hosting, email marketing, etc.).
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Tus Derechos</h2>
+        <p>
+            Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad contactándonos en el email indicado arriba.
+        </p>
+    </section>
+
+    <section>
+        <h2>8. Seguridad</h2>
+        <p>
+            Hemos adoptado medidas técnicas y organizativas según la normativa vigente para proteger tus datos personales contra pérdida, mal uso, acceso no autorizado o alteración.
+        </p>
+    </section>
+   
+</div>
+
+{% endblock %}

@@ -104,9 +104,17 @@
 
   <!-- Formulario + botón de cancelar alineados horizontalmente -->
   <div style="display: flex; gap: 15px; justify-content: flex-end; vertical-align: top">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ form.as_p }}  <!-- Mostramos todos los campos del formulario dentro de párrafos -->
+      <div class="form-group">
+        {{ form }}
+        {% if form.instance.imagen %}
+          <div>
+            <label>Imagen actual:</label><br>
+            <img src="{{ form.instance.imagen.url }}" alt="Imagen actual" style="max-width: 200px; height: auto;">
+          </div>
+        {% endif %}
+      </div>
       <button type="submit">Guardar</button>
     </form>
 

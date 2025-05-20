@@ -1,0 +1,89 @@
+{# ┌──────────────────────────────────────────────┐     #}
+{# │          PLANTILLA PRINCIPAL: AVISO LEGAL    │     #}
+{# └──────────────────────────────────────────────┘     #}
+{#                                                      #}
+{#                                                      #}
+{#   Esta es la página de Aviso Legal.                  #}
+
+{% extends "core/base.html" %}
+{% load static %}
+
+{# Carga la pagina Aviso Legal #}
+{% block content %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container2 {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 70px;
+            margin-bottom: 250px;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-size: 14px;
+        }
+
+       
+
+    </style>
+
+
+<div class="container2">
+
+    <h1>Aviso Legal</h1>
+
+    <h2>1. Identidad del titular</h2>
+    <p>Este sitio web es propiedad de <strong>[Tu Nombre o Razón Social]</strong>, con domicilio en [Dirección completa] y CIF/NIF [Tu CIF/NIF].</p>
+
+    <h2>2. Contacto</h2>
+    <p>Para cualquier consulta puede ponerse en contacto con nosotros a través del correo electrónico: <a href="mailto:info@tudominio.com">info@tudominio.com</a>.</p>
+
+    <h2>3. Finalidad del sitio web</h2>
+    <p>La finalidad de este sitio web es [explica brevemente la actividad o propósito del sitio web, por ejemplo: "informar sobre nuestros productos y servicios, gestionar pedidos, promociones, etc."].</p>
+
+    <h2>4. Condiciones de uso</h2>
+    <p>El acceso y uso de este sitio web implica la aceptación de las siguientes condiciones:</p>
+    <ul>
+        <li>No se permite el uso del sitio web para fines ilícitos o perjudiciales.</li>
+        <li>No se permite alterar, manipular o modificar el contenido sin autorización previa.</li>
+        <li>El usuario es responsable del uso que haga de los contenidos.</li>
+    </ul>
+
+    <h2>5. Propiedad intelectual</h2>
+    <p>Todos los contenidos del sitio web (textos, imágenes, diseños, logos, código fuente, etc.) son propiedad de <strong>[Tu Nombre o Empresa]</strong> o de terceros con los que se ha obtenido la autorización necesaria, y están protegidos por las leyes de propiedad intelectual e industrial.</p>
+
+    <h2>6. Exención de responsabilidad</h2>
+    <p>No nos hacemos responsables de posibles daños derivados del uso incorrecto, fallos técnicos o errores en el contenido del sitio web. Tampoco asumimos responsabilidad por los contenidos de sitios web externos a los que se pueda acceder desde enlaces incluidos en esta página.</p>
+
+    <h2>7. Legislación aplicable</h2>
+    <p>Este aviso legal se rige por la legislación española vigente. Para cualquier controversia, los usuarios se someten a los tribunales de [Ciudad], salvo que la normativa exija otro fuero diferente.</p>
+</div>
+
+{% endblock %}

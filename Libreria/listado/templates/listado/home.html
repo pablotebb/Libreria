@@ -19,7 +19,9 @@
 
   /* Ajuste visual para listado de críticas */
   .criticas-list {
-    margin-left: 20px;
+    list-style: none; /* Elimina las viñetas */
+    padding-left: 0;   /* Elimina el sangrado por defecto */
+    margin-left: 0;    /* Asegura que no haya margen extra */
   }
 
   /* Estados visuales claros para si se ha leído o no */
@@ -63,6 +65,7 @@
   <table id="tabla-libros" class="table table-dark-blue table-striped table-bordered">
     <thead>
       <tr>
+        <th>Imagen</th>
         <th>Título</th>
         <th>Autor</th>
         <th>Leído</th>
@@ -73,6 +76,13 @@
       {% for libro in listado %}
         <!-- Fila identificable y con atributo data para filtrado -->
         <tr id="fila-{{ forloop.counter }}" data-leido="{{ libro.leido }}">
+          <td>
+            {% if libro.imagen %}
+                <img src="{{ libro.imagen.url }}" alt="Portada de {{ libro.titulo }}" class="img-fluid" style="max-height: 100px; max-width: 80px;">
+            {% else %}
+                <span style="color: yellow;">Sin imagen</span>
+            {% endif %}
+          </td>
           <td>{{ libro.titulo }}</td>
           <td>{{ libro.autor }}</td>
           <td>
@@ -89,7 +99,7 @@
               {% if libro.criticas %}
                 <li>{{ libro.criticas.contenido }}</li>
               {% else %}
-                <li>No hay críticas aún.</li>
+                <li style="color: yellow;">No hay críticas aún.</li>
               {% endif %}
             </ul>
           </td>

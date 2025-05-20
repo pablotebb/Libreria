@@ -21,4 +21,8 @@ urlpatterns = [
     # Ruta principal: Página de inicio
     # Accesible desde la raíz del dominio: http://dominio/
     path("", views.home, name="home"),
+    path("aviso/", views.aviso, name="aviso"),
+    path("cookies/", views.cookie, name="cookie"),
+    path("privacidad/", views.privacidad, name="privacidad"),
+    
 ]

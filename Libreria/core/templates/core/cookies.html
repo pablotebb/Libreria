@@ -1,0 +1,154 @@
+{# ┌──────────────────────────────────────────────┐     #}
+{# │          PLANTILLA PRINCIPAL: COOKIES        │     #}
+{# └──────────────────────────────────────────────┘     #}
+{#                                                      #}
+{#                                                      #}
+{#   Esta es la página de Cookies.                      #}
+
+{% extends "core/base.html" %}
+{% load static %}
+
+{# Carga la pagina Aviso Legal #}
+{% block content %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container2 {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 70px;
+            margin-bottom: 250px;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-size: 14px;
+        }
+
+       
+
+    </style>
+
+
+<div class="container2">
+  <header>
+    <h1>Política de Cookies</h1>
+    <p>Última actualización: 5 de abril de 2025</p>
+  </header>
+
+  <section>
+      <h2>¿Qué es una cookie?</h2>
+      <p>
+          Una cookie es un pequeño archivo de texto que se almacena en tu dispositivo (ordenador, móvil o tableta) cuando visitas una página web. 
+          Las cookies permiten que la web recuerde tus acciones y preferencias durante un tiempo determinado.
+      </p>
+  </section>
+
+  <section>
+      <h2>Tipos de cookies que utilizamos</h2>
+      <p>En este sitio web utilizamos los siguientes tipos de cookies:</p>
+      <ul>
+          <li><strong>Cookies técnicas:</strong> Son necesarias para el funcionamiento básico del sitio.</li>
+          <li><strong>Cookies de análisis:</strong> Nos ayudan a entender cómo interactúan los usuarios con el sitio (por ejemplo, Google Analytics).</li>
+          <li><strong>Cookies de personalización:</strong> Permiten recordar tus preferencias (idioma, región, etc.).</li>
+          <li><strong>Cookies publicitarias:</strong> Se usan para mostrarte anuncios relevantes según tus intereses.</li>
+      </ul>
+  </section>
+
+  <section>
+      <h2>Cookies utilizadas en esta web</h2>
+      <table>
+          <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
+                  <th>Finalidad</th>
+                  <th>Duración</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>_ga</td>
+                  <td>Análisis</td>
+                  <td>Analizar el uso del sitio web</td>
+                  <td>2 años</td>
+              </tr>
+              <tr>
+                  <td>_gid</td>
+                  <td>Análisis</td>
+                  <td>Analizar el uso del sitio web</td>
+                  <td>24 horas</td>
+              </tr>
+              <tr>
+                  <td>PHPSESSID</td>
+                  <td>Técnica</td>
+                  <td>Mantener la sesión activa</td>
+                  <td>Al cerrar el navegador</td>
+              </tr>
+          </tbody>
+      </table>
+  </section>
+
+  <section>
+      <h2>Gestión y desactivación de cookies</h2>
+      <p>Puedes configurar tu navegador para:</p>
+      <ul>
+          <li>Bloquear todas las cookies.</li>
+          <li>Aceptar solo ciertos tipos de cookies.</li>
+          <li>Eliminar cookies almacenadas.</li>
+      </ul>
+      <p>
+          Para más información, consulta la ayuda de tu navegador:
+          <ul>
+              <li><a href="https://support.google.com/chrome/answer/95647 " target="_blank">Chrome</a></li>
+              <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias " target="_blank">Firefox</a></li>
+              <li><a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac " target="_blank">Safari</a></li>
+              <li><a href="https://privacy.microsoft.com/es-es/windows-10-microsoft-edge-and-privacy " target="_blank">Edge</a></li>
+          </ul>
+      </p>
+  </section>
+
+  <section>
+      <h2>Consentimiento</h2>
+      <p>
+          Al navegar por nuestra web y hacer clic en "Aceptar", consientes el uso de todas las cookies mencionadas en esta política. 
+          Puedes revocar tu consentimiento en cualquier momento contactándonos.
+      </p>
+  </section>
+
+  <section>
+      <h2>Contacto</h2>
+      <p>
+          Si tienes dudas sobre nuestra política de cookies, puedes contactarnos en: <br>
+          <strong>Email:</strong> privacidad@tudominio.com
+      </p>
+  </section>
+    
+</div>
+
+{% endblock %}

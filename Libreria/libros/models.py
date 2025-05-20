@@ -1,5 +1,7 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User  # Modelo estándar de usuarios de Django
+from PIL import Image
 
 
 # ┌──────────────────────────────────────────────────────┐
@@ -49,7 +51,7 @@ class Libro(models.Model):
     contenido = models.TextField()
 
     # Imagen opcional del libro (portada, por ejemplo)
-    imagen = models.ImageField(upload_to="libros", null=True, blank=True)
+    imagen = models.ImageField(upload_to="libros/", null=True, blank=True)
 
     # Estado de lectura - útil para listados personalizados
     leido = models.BooleanField(default=True)
@@ -64,3 +66,20 @@ class Libro(models.Model):
 
     def __str__(self):
         return self.titulo  # Muestra el título en lugar del ID en admin y shell
+      
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Primero guardamos el modelo para asegurar que tenga imagen asociada
+
+        if self.imagen and os.path.exists(self.imagen.path):  # Verificamos que exista el archivo
+            img = Image.open(self.imagen.path)
+
+            # Tamaño máximo deseado (ajusta estos valores según tus necesidades)
+            max_width = 800
+            max_height = 800
+
+            # Redimensionar si es necesario
+            if img.width > max_width or img.height > max_height:
+                img.thumbnail((max_width, max_height), Image.LANCZOS)
+
+                # Guardamos la imagen redimensionada
+                img.save(self.imagen.path, optimize=True, quality=85)  # Ajuste de calidad opcional
