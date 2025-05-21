@@ -98,22 +98,19 @@
   }
 </style>
 
+{% if user.is_authenticated %}
+
 <!-- 📝 Formulario central para editar una crítica -->
 <div class="container-form">
-  <h1>Editar Crítica</h1>
+  <h1>Editar Libro</h1>
 
   <!-- Formulario + botón de cancelar alineados horizontalmente -->
   <div style="display: flex; gap: 15px; justify-content: flex-end; vertical-align: top">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
-        {{ form }}
-        {% if form.instance.imagen %}
-          <div>
-            <label>Imagen actual:</label><br>
-            <img src="{{ form.instance.imagen.url }}" alt="Imagen actual" style="max-width: 200px; height: auto;">
-          </div>
-        {% endif %}
+        {{ form.as_p }}
+        {# Muestra la imagen actual si existe #}
       </div>
       <button type="submit">Guardar</button>
     </form>
@@ -122,5 +119,9 @@
     <a href="{% url 'libro:libros' %}">Cancelar</a>
   </div>
 </div>
+
+{% else %}
+  <p>Inicia sesión para editar tus libros.</p>
+{% endif %}
 
 {% endblock %}

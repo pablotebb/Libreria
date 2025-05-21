@@ -82,6 +82,9 @@
     }
 </style>
 
+{% if user.is_authenticated %}
+  
+
 <div class="container">
     {# 📋 Formulario para agregar una nueva crítica #}
     <div class="form-container">
@@ -123,6 +126,10 @@
         </ul>
     </div>
 </div>
+
+{% else %}
+  <p>Inicia sesión para agregar una crítica.</p>
+{% endif %}
 
 <div class="container2"></div>
 

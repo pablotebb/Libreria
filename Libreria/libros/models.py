@@ -1,4 +1,5 @@
 import os
+from django.utils.text import slugify
 from django.db import models
 from django.contrib.auth.models import User  # Modelo estándar de usuarios de Django
 from PIL import Image
@@ -26,6 +27,13 @@ class Categoria(models.Model):
         return self.nombre  # Para mostrar el nombre en lugar del ID en admin y shell
 
 
+def directorio_imagen_libro(instance, filename):
+    ext = filename.split('.')[-1]
+    titulo = instance.titulo or "sin_titulo"
+    nombre_archivo = f"libro_{slugify(titulo[:40])}.{ext}"
+    return os.path.join('libros', nombre_archivo)
+
+
 # ┌──────────────────────────────────────────────────────┐
 # │                    MODELO DE LIBRO                   │
 # └──────────────────────────────────────────────────────┘
@@ -51,7 +59,7 @@ class Libro(models.Model):
     contenido = models.TextField()
 
     # Imagen opcional del libro (portada, por ejemplo)
-    imagen = models.ImageField(upload_to="libros/", null=True, blank=True)
+    imagen = models.ImageField(upload_to=directorio_imagen_libro, null=True, blank=True)
 
     # Estado de lectura - útil para listados personalizados
     leido = models.BooleanField(default=True)
@@ -83,3 +91,6 @@ class Libro(models.Model):
 
                 # Guardamos la imagen redimensionada
                 img.save(self.imagen.path, optimize=True, quality=85)  # Ajuste de calidad opcional
+                
+                
+                

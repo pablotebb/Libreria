@@ -45,6 +45,9 @@
   }
 </style>
 
+{% if user.is_authenticated %}
+  
+
 <!-- 📊 Contenedor principal con tabla filtrable -->
 <div class="container mt-4">
   
@@ -129,5 +132,10 @@
     });
   }
 </script>
+
+{% else %}
+  <p>Inicia sesión para listado de libros.</p>
+{% endif %}
+
 
 {% endblock %}

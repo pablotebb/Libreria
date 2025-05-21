@@ -25,19 +25,35 @@ def critica_view(request):
 
     if request.method == 'POST':
         form = Formulario_critica(request.POST)
+        # Filtramos antes de validar para que solo muestre libros propios
+        form.fields['id_libros'].queryset = Libro.objects.filter(
+            leido=True,
+            usuario=request.user
+        )
         if form.is_valid():
-            critica = form.save()
+            critica = form.save(commit=False)
+            critica.usuario = request.user  # ✅ Asignamos el usuario actual
+            critica.save()
             messages.success(request, f'Crítica para "{critica.id_libros}" guardada correctamente.')
             return redirect('critica:critica')
         else:
             messages.warning(request, 'Ya existe una crítica para este libro.')
-            form.fields['id_libros'].queryset = Libro.objects.filter(leido=True)
+            form.fields['id_libros'].queryset = Libro.objects.filter(
+              leido=True,
+              usuario=request.user
+            )
     else:
         form = Formulario_critica()
-        form.fields['id_libros'].queryset = Libro.objects.filter(leido=True)
+        form.fields['id_libros'].queryset = Libro.objects.filter(
+          leido=True,
+          usuario=request.user
+        )
 
     # Mostramos solo las críticas de libros leídos
-    criticas = Critica.objects.filter(id_libros__leido=True)
+    criticas = Critica.objects.filter(
+      id_libros__leido=True,
+      usuario=request.user
+    )
 
     return render(request, 'critica/critica.html', {
         'form': form,
@@ -58,7 +74,7 @@ def editar_critica(request, pk):
     critica = get_object_or_404(Critica, pk=pk)
 
     if request.method == 'POST':
-        form = Formulario_critica_editar(request.POST, instance=critica)
+        form = Formulario_critica_editar(request.POST, request.FILES, instance=critica)
         if form.is_valid():
             form.save()
             messages.success(request, f'Crítica para "{critica.id_libros}" actualizada correctamente.')

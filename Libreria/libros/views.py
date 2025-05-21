@@ -25,7 +25,9 @@ def libro_view(request):
             form.save_m2m()  # Guardamos relaciones ManyToMany (ej: categorías)
 
             messages.success(request, 'Libro creado exitosamente.')
+            libros = Libro.objects.filter(usuario=request.user)
             return redirect('libro:libros')
+            #return render(request, 'libros/libro.html', {'libros': libros})
 
         else:
             messages.error(request, 'Hubo errores al crear el libro. Por favor corrige los campos.')
@@ -37,7 +39,8 @@ def libro_view(request):
 
     else:
         form = Formulario_libros()
-        libros = Libro.objects.all()  # Obtenemos todos los libros para mostrarlos
+        #libros = Libro.objects.all()  # Obtenemos todos los libros para mostrarlos
+        libros = Libro.objects.filter(usuario=request.user)
 
         return render(request, 'libros/libro.html', {
             'form': form,
@@ -63,6 +66,11 @@ def editar_libro(request, pk):
         if form.is_valid():
             libro = form.save(commit=False)
             libro.usuario = request.user  # Aseguramos que el autor siga siendo el mismo
+            
+             # 🔐 
+            #print("Imagen: ", form.cleaned_data['imagen'])
+            
+            
             libro.save()
             form.save_m2m()  # Actualizamos las relaciones ManyToMany
 

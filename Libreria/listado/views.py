@@ -16,8 +16,9 @@ def home(request):
     especialmente útiles si se accede frecuentemente al usuario dueño de cada libro.
     """
 
-    # Cargamos todos los libros con su relación 'usuario' previamente cargada
-    libros = Libro.objects.prefetch_related('usuario').all()
+    # Cargamos todos los libros con su relación 'usuario' previamente cargada,
+    # filtramos por usuario.
+    libros = Libro.objects.prefetch_related('usuario').filter(usuario=request.user)
 
     # 📦 Creamos un listado iterable de libros para pasar a la plantilla
     listado_libros = list()

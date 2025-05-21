@@ -79,6 +79,8 @@
       }
   </style>
 
+  {% if user.is_authenticated %}
+
   <!-- 📚 Contenedor principal con dos secciones: formulario y listado -->
   <div class="container">
     
@@ -167,6 +169,10 @@
     </div>
 
   </div>
+
+  {% else %}
+    <p>Inicia sesión para agregar un libro.</p>
+  {% endif %}
 
   <!-- Espacio adicional limpio para separar contenido inferior -->
   <div class="container2"></div>

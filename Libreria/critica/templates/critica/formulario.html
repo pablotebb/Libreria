@@ -99,6 +99,8 @@
   }
 </style>
 
+{% if user.is_authenticated %}
+ 
 <div class="container-form">
   <h1>Editar Crítica</h1>
 
@@ -117,5 +119,9 @@
     <a href="{% url 'critica:critica' %}">Cancelar</a>
   </div>
 </div>
+
+{% else %}
+  <p>Inicia sesión para editar tus libros.</p>
+{% endif %}
 
 {% endblock %}
